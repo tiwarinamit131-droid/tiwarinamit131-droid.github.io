@@ -38,12 +38,13 @@
 :root[data-phosphor="ice"] { --amber: #8fd8ff; --dim: #4b7fa3; --hot: #eaf7ff; --crt: #071018; --ok: #a5f0d4; }
 :root[data-phosphor="saffron"] { --amber: #ff9933; --dim: #b8621f; --hot: #ffe2b8; --crt: #1d0c03; --ok: #ffd04d; --alert: #ff4f3a; }
 * { box-sizing: border-box; }
+[hidden] { display: none !important; }
 body { margin: 0; background: var(--wall); color: var(--amber); font-family: var(--mono); font-size: 15px; line-height: 1.5; }
 :focus-visible { outline: 2px solid var(--note); outline-offset: 3px; }
 .room { min-height: 100vh; display: flex; flex-direction: column; background:
   radial-gradient(ellipse 60% 45% at 50% 30%, color-mix(in srgb, var(--amber) 10%, transparent), transparent 70%),
   repeating-linear-gradient(90deg, var(--wall) 0 46px, var(--wall-line) 46px 48px); padding-top: 22px; }
-.stage { max-width: 1180px; margin: 0 auto; padding-inline: 16px; }
+.stage { width: 100%; box-sizing: border-box; max-width: 1180px; margin: 0 auto; padding-inline: 16px; }
 
 /* ---------- monitor ---------- */
 .monitor { max-width: 900px; margin: 0 auto; position: relative; }
@@ -104,7 +105,7 @@ body { margin: 0; background: var(--wall); color: var(--amber); font-family: var
   linear-gradient(180deg, #7a5233 0, var(--wood) 10px, var(--wood-dark) 100%),
   repeating-linear-gradient(178deg, transparent 0 18px, rgb(0 0 0 / .06) 18px 20px); background-blend-mode: multiply; box-shadow: inset 0 3px 0 #94673f; }
 .deskgrid { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr minmax(0, 820px) 1fr; gap: 22px; align-items: end; }
-.cluster { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; min-width: 0; }
+.cluster { display: flex; gap: 12px 14px; align-items: flex-end; flex-wrap: wrap; min-width: 0; }
 .cluster.left { justify-content: flex-end; }
 .obj { all: unset; cursor: pointer; position: relative; display: block; filter: drop-shadow(0 8px 6px rgb(0 0 0 / .45)); transition: transform .15s; }
 .obj:hover { transform: translateY(-3px) rotate(-2deg); }
@@ -157,6 +158,7 @@ body { margin: 0; background: var(--wall); color: var(--amber); font-family: var
 .fetch dd { margin: 0; min-width: 0; }
 .swatch { display: flex; margin-top: 6px; }
 .swatch i { width: 22px; height: 14px; display: block; }
+pre.figlet { margin: 4px 0 6px; font-family: var(--mono); font-size: clamp(7px, 2.1vw, 15px); line-height: 1.15; color: var(--hot); text-shadow: 0 0 8px var(--hot); overflow: hidden; }
 .big { font-family: var(--display); font-size: clamp(38px, 8vw, 72px); line-height: .85; color: var(--hot); letter-spacing: .03em; }
 table { border-collapse: collapse; }
 td, th { padding: 1px 14px 1px 0; vertical-align: top; text-align: left; font-weight: 400; }
@@ -166,6 +168,25 @@ th { color: var(--crt); background: var(--amber); text-shadow: none; padding: 0 
 .v01 canvas { width: min(240px, 100%); height: auto; aspect-ratio: 3 / 4; max-width: 100%; display: block; margin: 6px 0; border: 1px solid var(--dim); image-rendering: pixelated; cursor: pointer; box-shadow: 0 0 18px color-mix(in srgb, var(--amber) 30%, transparent); }
 .matrix { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
 
+.nosig { position: absolute; inset: 6px; z-index: 3; border-radius: 12px; background: #020203; display: grid; place-content: center; text-align: center; gap: 10px;
+  color: #c8d0ff; font: 30px/1.1 var(--display); letter-spacing: .06em; cursor: pointer; }
+.nosig small { display: block; font-size: 20px; color: #7f88b8; animation: blink 1.4s steps(1) infinite; }
+@keyframes blink { 60% { opacity: .15; } }
+.notes { display: block; max-width: 540px; margin: 8px 0; padding: 14px 18px 16px 34px; color: #263a78; text-shadow: none; font: 600 21px/30px var(--hand); white-space: pre-line;
+  background: linear-gradient(90deg, transparent 22px, #e59a9a 22px 24px, transparent 24px), repeating-linear-gradient(180deg, #f6efda 0 29px, #b8c7e6 29px 30px); transform: rotate(-.6deg);
+  box-shadow: 0 6px 14px rgb(0 0 0 / .4); }
+.notes b { font-size: 26px; }
+.md h1, .md h2 { display: inline; margin: 0; font: inherit; color: var(--hot); }
+.md h1 { font-family: var(--display); font-size: 30px; line-height: 1.1; }
+.notebook { width: 46px; height: 58px; background: #2c4a7a; border-radius: 3px 5px 5px 3px; transform: rotate(-6deg); box-shadow: inset 6px 0 0 #1d3256;
+  display: grid; place-items: center; font: 700 13px var(--hand); color: #e8dfc8; }
+.notebook::after { content: ""; position: absolute; left: 2px; top: 6px; bottom: 6px; width: 3px; background: repeating-linear-gradient(180deg, #c9c1ad 0 3px, transparent 3px 7px); }
+.phone { width: 30px; height: 54px; background: #1a1a1f; border-radius: 6px; padding: 4px 3px 8px; transform: rotate(8deg); }
+.phone i { display: block; height: 100%; border-radius: 3px; background: linear-gradient(160deg, #2a3f6a, #101624); box-shadow: inset 0 0 6px #4b7fd1; }
+.trash svg { width: 40px; height: 48px; }
+.clock { padding: 5px 7px; background: #141010; border-radius: 6px; border: 2px solid #3a2f26; font: 22px/1 var(--display); color: #ff4a3a; text-shadow: 0 0 6px #ff4a3a; letter-spacing: .05em; }
+.clock.night { color: #a8352c; text-shadow: 0 0 3px #a8352c; }
+.trophy svg { width: 30px; height: 36px; }
 .sticky.on-desk { position: relative; right: auto; top: auto; display: none; width: 100px; padding: 7px 8px 9px; font-size: 13px; transform: rotate(-4deg); }
 @media (max-width: 1240px) { .bezel .sticky { display: none; } .sticky.on-desk { display: block; } }
 @media (max-width: 1100px) {
@@ -205,12 +226,13 @@ th { color: var(--crt); background: var(--amber); text-shadow: none; padding: 0 
             <div class="screen" id="screen" aria-live="polite">
               <div id="out"></div>
               <form class="row" id="form" autocomplete="off">
-                <span class="prompt">namit@sau:~$</span>
+                <span class="prompt" id="ps1">namit@sau:~$</span>
                 <input id="cmd" name="cmd" aria-label="Type a command" spellcheck="false" autocapitalize="off">
               </form>
             </div>
             <div class="scan" aria-hidden="true"></div>
           </div>
+          <div class="nosig" id="nosig" hidden>No signal.<small>Press any key to restart.</small></div>
         </div>
         <div class="controls">
           <span class="model">NT-2029 · 14" colour</span>
@@ -221,7 +243,7 @@ th { color: var(--crt); background: var(--amber); text-shadow: none; padding: 0 
           <i class="led" id="led"></i>
         </div>
         <button class="sticker" type="button" data-run="cat .gada" aria-label="Sticker"><svg viewBox="0 0 12 12"><circle cx="6" cy="3.6" r="2.6" fill="#fff"/><rect x="5.3" y="5.6" width="1.4" height="5.6" fill="#fff"/></svg></button>
-        <div class="sticky"><b>TODO</b>☑ ship BACHAT<br>☐ win SIH 2026<br>☐ learn Qiskit<br>☐ get <button type="button" data-run="contact">hired</button></div>
+        <div class="sticky"><b>TODO</b>☑ ship BACHAT<br>☐ win SIH 2026<br>☐ learn Qiskit<br>☐ get <button type="button" data-run="./get-hired">hired</button></div>
         <div class="toast" id="toast" hidden></div>
       </div>
       <div class="stand"></div>
@@ -231,9 +253,11 @@ th { color: var(--crt); background: var(--amber); text-shadow: none; padding: 0 
   <div class="desk">
     <div class="deskgrid">
       <div class="cluster left">
-        <div class="sticky on-desk"><b>TODO</b>☑ ship BACHAT<br>☐ win SIH 2026<br>☐ learn Qiskit<br>☐ get <button type="button" data-run="contact">hired</button></div>
+        <div class="sticky on-desk"><b>TODO</b>☑ ship BACHAT<br>☐ win SIH 2026<br>☐ learn Qiskit<br>☐ get <button type="button" data-run="./get-hired">hired</button></div>
         <button class="obj polaroid" type="button" data-run="git checkout v0.1" aria-label="A photo, face down">v0.1</button>
         <button class="obj paper" type="button" data-run="cat .heart" aria-label="A folded note">♡</button>
+        <button class="obj notebook" type="button" data-run="cat notes.md" aria-label="Notebook">notes</button>
+        <button class="obj phone" type="button" data-run="phone" aria-label="Phone"><i></i></button>
         <button class="obj mug" type="button" data-run="cat .coffee" aria-label="Black coffee">
           <span class="steam" aria-hidden="true"><i></i><i></i><i></i></span>
           <svg viewBox="0 0 64 64"><path d="M44 28h5a7 7 0 0 1 0 14h-5" fill="none" stroke="#2b2724" stroke-width="5"/><path d="M12 22h33v26a9 9 0 0 1-9 9H21a9 9 0 0 1-9-9z" fill="#2b2724"/><ellipse cx="28.5" cy="22" rx="16.5" ry="4" fill="#120904"/><text x="28.5" y="44" font-size="10" text-anchor="middle" fill="#ffb547" font-family="monospace">&lt;/&gt;</text></svg>
@@ -247,6 +271,9 @@ th { color: var(--crt); background: var(--amber); text-shadow: none; padding: 0 
         <button class="obj phones" type="button" data-run="play metal" aria-label="Headphones"><svg viewBox="0 0 64 48"><path d="M10 34V26a22 22 0 0 1 44 0v8" fill="none" stroke="#24242a" stroke-width="5"/><rect x="3" y="26" width="13" height="20" rx="5" fill="#33333b"/><rect x="48" y="26" width="13" height="20" rx="5" fill="#33333b"/><circle cx="9.5" cy="36" r="2" fill="#d23b2f"/></svg></button>
         <button class="obj shuttle" type="button" data-run="cat .court" aria-label="Shuttlecock"><svg viewBox="0 0 64 64"><path d="M20 6h24l-8 36h-8z" fill="#f4f1ea" stroke="#c9c1ad"/><path d="M26 6l4 36M38 6l-4 36M32 6v36" stroke="#c9c1ad"/><rect x="25" y="40" width="14" height="4" fill="#2c6bd1"/><path d="M25 44h14a7 7 0 0 1-14 0z" fill="#efe0bf"/></svg></button>
         <button class="obj dumbbell" type="button" data-run="cat .gym" aria-label="Dumbbell"><svg viewBox="0 0 86 34"><rect x="14" y="15" width="58" height="4" fill="#9a9a9a"/><rect x="7" y="5" width="9" height="24" rx="2" fill="#2f2f2f"/><rect x="70" y="5" width="9" height="24" rx="2" fill="#2f2f2f"/><rect x="0" y="9" width="7" height="16" rx="2" fill="#444"/><rect x="79" y="9" width="7" height="16" rx="2" fill="#444"/></svg></button>
+        <button class="obj clock" id="deskclock" type="button" data-run="date" aria-label="Desk clock">00:00</button>
+        <button class="obj trash" type="button" data-run="ls ~/.trash" aria-label="Wastebasket"><svg viewBox="0 0 40 48"><path d="M4 10h32l-4 36H8z" fill="#3b3b40"/><path d="M8 18h24M9 26h22M10 34h20" stroke="#2a2a2e" stroke-width="2"/><circle cx="14" cy="8" r="5" fill="#ece6d6"/><circle cx="25" cy="7" r="4.5" fill="#e2dccb"/><rect x="2" y="9" width="36" height="3" rx="1.5" fill="#55555c"/></svg></button>
+        <button class="obj trophy" id="trophy" type="button" data-run="achievements" aria-label="Trophy" hidden><svg viewBox="0 0 30 36"><path d="M7 3h16v9a8 8 0 0 1-16 0z" fill="#e3b341"/><path d="M7 6H2a6 6 0 0 0 6 7M23 6h5a6 6 0 0 1-6 7" fill="none" stroke="#e3b341" stroke-width="2"/><rect x="13" y="19" width="4" height="8" fill="#c9962b"/><rect x="8" y="27" width="14" height="6" rx="1" fill="#7a5a1d"/></svg></button>
         <button class="obj compass" type="button" data-run="cat .compass" aria-label="Compass"><svg viewBox="0 0 48 48"><circle cx="24" cy="24" r="21" fill="#b8892f" stroke="#7a5a1d" stroke-width="3"/><circle cx="24" cy="24" r="16" fill="#efe6cf"/><g class="needle"><path d="M24 11l3 13-3 13-3-13z" fill="#c33"/><path d="M24 24h3l-3 13-3-13z" fill="#334"/></g><circle cx="24" cy="24" r="2" fill="#7a5a1d"/></svg></button>
       </div>
     </div>
@@ -283,12 +310,17 @@ function unlock(key) {
 showFound();
 
 /* ---------- the "battery" is really caffeine ---------- */
-let caff = 92;
+let caff = 92, cups = 0;
 function drawCaff() { $("lvl").style.width = caff + "%"; $("pct").textContent = Math.round(caff) + "%"; }
 setInterval(() => { caff = Math.max(4, caff - 1); drawCaff(); if (caff === 15) print('<span class="dim">[kernel] warning: low power. Something needs refilling.</span>'); }, 9000);
-$("batt").addEventListener("click", () => typeAndRun("cat .coffee"));
-function tickClock() { $("clock").textContent = new Date().toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" }); }
-tickClock(); setInterval(tickClock, 15000);
+$("batt").addEventListener("click", () => typeAndRun("systemctl status"));
+function tickClock() {
+  const d = new Date(), h = d.getHours(), dc = $("deskclock");
+  $("clock").textContent = d.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
+  dc.textContent = String(h).padStart(2, "0") + (d.getSeconds() % 2 ? " " : ":") + String(d.getMinutes()).padStart(2, "0");
+  dc.classList.toggle("night", h >= 22 || h < 6);
+}
+tickClock(); setInterval(tickClock, 1000);
 
 /* ---------- art ---------- */
 const LOGO = String.raw`
@@ -328,19 +360,23 @@ const SKILLS = [["python", 9, "data pipelines, scripting, Qiskit-curious"], ["ja
 function neofetch() {
   print(`<div class="fetch"><pre>${LOGO}</pre><dl>
 <dt>namit@sau</dt><dd class="dim">----------------</dd>
-<dt>Name</dt><dd>Namit Tiwari</dd>
-<dt>Role</dt><dd>B.Tech Computer Science student</dd>
-<dt>Host</dt><dd>South Asian University, New Delhi</dd>
+<dt>OS</dt><dd>NamitOS 1.0</dd>
+<dt>Host</dt><dd>South Asian University, New Delhi (B.Tech CSE)</dd>
 <dt>Kernel</dt><dd>bajrang-6.1-lts</dd>
 <dt>Uptime</dt><dd>class of 2029, year 1</dd>
+<dt>Shell</dt><dd>bash-ish</dd>
+<dt>DE</dt><dd>questionable</dd>
+<dt>CPU</dt><dd>caffeine</dd>
 <dt>Focus</dt><dd>quantum computing · geospatial AI · web</dd>
 <dt>Current</dt><dd>Smart India Hackathon 2026 (NTRO)</dd>
-<dt>Shell</dt><dd>python, java, c, javascript, verilog</dd>
+<dt>Projects</dt><dd>${String(Object.keys(PROJ).length).padStart(2, "0")} in ${link("ls ~/projects", "~/projects")}</dd>
+<dt>Bugs</dt><dd>classified</dd>
 </dl></div><div class="swatch"><i style="background:#3a2c1c"></i><i style="background:var(--dim)"></i><i style="background:var(--amber)"></i><i style="background:var(--hot)"></i><i style="background:var(--ok)"></i><i style="background:var(--alert)"></i></div>`);
 }
 
 const COMMANDS = {
   help: () => print(`<span class="hot">NamitOS help</span>
+  ${link("ls")}          look around (folders open with cd)
   ${link("neofetch")}    system summary
   ${link("about")}       who is Namit
   ${link("skills")}      installed packages
@@ -349,6 +385,8 @@ const COMMANDS = {
   ${link("courses")}     loaded modules
   ${link("contact")}     open a connection
   ${link("resume")}      full résumé, grades included
+  ${link("top")}         what's using the CPU
+  ${link("history")}     how we got here
   ${link("qubit")}       measure a qubit
   ${link("joke")}        random terminal joke
   ${link("theme")}       change phosphor colour
@@ -450,9 +488,9 @@ github    <a href="https://github.com/tiwarinamit131-droid" target="_blank" rel=
   "copy-email": () => { try { navigator.clipboard.writeText("thenamittiwari@gmail.com").then(() => print('<span class="ok">copied.</span>'), () => print("couldn't copy. Select it above.")); } catch { print("couldn't copy. Select it above."); } },
   clear: () => { out.innerHTML = ""; },
   theme: () => print(`usage: theme ${link("theme amber", "amber")} | ${link("theme green", "green")} | ${link("theme ice", "ice")}${found.has("gada") ? " | " + link("theme saffron", "saffron") : ""}`),
-  ls: () => print(`about.txt  skills/  projects/  education.log  contact.sh  ${link("cat resume.txt", "resume.txt")}`),
-  "ls -a": () => print(`<span class="dim">.  ..</span>  ${[".coffee", ".heart", ".gada", ".playlist", ".court", ".gym", ".byte", ".compass", ".v0.1.jpg"].map(f => link("cat " + f, f)).join("  ")}
-about.txt  skills/  projects/  education.log  contact.sh  resume.txt`),
+  ls: () => print(HOME_LS()),
+  "ls -a": () => print(`<span class="dim">.  ..</span>  ${[...DOTS, ...(found.size === TOTAL ? [".credits"] : [])].map(f => link("cat " + f, f)).join("  ")}  ${link("ls ~/.trash", ".trash/")}
+${HOME_LS()}`),
   "ls -la": () => COMMANDS["ls -a"](),
   "cat about.txt": () => COMMANDS.about(),
   "uname -a": () => print(`NamitOS 1.0 bajrang-6.1-lts #1 SMP x86_64 GNU/Linux
@@ -461,7 +499,12 @@ about.txt  skills/  projects/  education.log  contact.sh  resume.txt`),
   /* ---- secrets ---- */
   "cat .coffee": () => { unlock("caffeine"); caff = 100; drawCaff(); print(`<pre class="art hot">${CUP}</pre>That "battery" up there? Not a battery. It's caffeine.
 Namit is a hardcore coffee lover. Black coffee or an iced americano, nothing else.
-No milk, no sugar, no compromises. Refilled to 100%.`); },
+No milk, no sugar, no compromises. Refilled to 100%.
+
+<span class="hot">caffeine stats</span>
+  cups this visit   ${++cups}
+  caffeine level    100%
+  half-life         about 5 hours <span class="dim">(Namit: about 5 minutes)</span>`); },
   "cat .heart": () => { unlock("heart"); print(`<span class="dim">$ cat /dev/heart</span>
 <span class="alert">♥</span> Namit feels things deeply. Songs, films, goodbyes, small kindnesses.
   Not a bug. It's why the software gets built for people, not just for machines.
@@ -636,9 +679,14 @@ __/ =| o |=-~~\  /~~\  /~~\  /~~\ ____Y___________|__
   "cd ..": () => print("You can't leave. This is the best directory on the internet."),
   cd: () => print("you're already home. 🏠"),
   pwd: () => print("/home/namit/portfolio <span class=\"dim\">(the good part of the internet)</span>"),
-  date: () => print(new Date().toString() + "\n<span class=\"dim\">a good day to hire someone.</span>"),
+  date: () => {
+    const d = new Date(), h = d.getHours();
+    const m = h < 5 ? "Past midnight. Somewhere a bug is being fixed. You should be asleep." : h < 12 ? "Morning. Coffee #1 is brewing." : h < 17 ? "Afternoon. Peak compile hours."
+      : h < 21 ? "Evening. Badminton or gym o'clock." : "Night. Headphones on, Gojira loud, code flowing.";
+    print(d.toString() + `\n<span class="dim">${m} Also a good day to hire someone.</span>`);
+  },
   uptime: () => print(`up since first boot, load average: coffee, code, metal`),
-  history: () => print(hist.length ? hist.map((h, i) => `  ${String(i + 1).padStart(3)}  ${esc(h)}`).join("\n") : "nothing yet. You're new here."),
+  history: () => print(NH.map((h, i) => `  ${String(i + 1).padStart(3)}  ${link("!" + (i + 1), h)}`).join("\n") + (hist.length ? "\n" + hist.map((h, i) => `  ${String(i + NH.length + 1).padStart(3)}  ${esc(h)}`).join("\n") : "")),
   "rm -rf node_modules": () => print("Freed 3.4 GB. The universe feels lighter."),
   ":(){ :|:& };:": () => print('<span class="alert">fork bomb detected.</span> Defused. Nice try, chaos agent.'),
   "hello": () => print("Hello, world! 👋 (the first program everyone writes)"), hi: () => COMMANDS.hello(),
@@ -663,6 +711,78 @@ __/ =| o |=-~~\  /~~\  /~~\  /~~\ ____Y___________|__
   "rm -rf /": () => print('<span class="alert">Nice try.</span> Permission denied. Everything is on GitHub anyway.'),
   matrix: () => runMatrix(),
   exit: () => print("There is no exit. Only " + link("contact") + "."),
+  "systemctl status": () => {
+    const row = (n, v, note = "") => `${n.padEnd(11)}${"█".repeat(Math.round(v / 10))}${"░".repeat(10 - Math.round(v / 10))} ${String(Math.round(v)).padStart(3)}%${note}`;
+    print(`<span class="hot">SYSTEM STATUS</span>
+${row("CPU", 55 + Math.random() * 30)}
+${row("RAM", 48 + Math.random() * 22)}
+${row("BATTERY", caff, ` <span class="dim">${link("cat .coffee", "*")}</span>`)}
+${row("MOTIVATION", motiv())}
+
+${motiv() >= 90 ? '<span class="ok">Motivation critical. Something good is about to happen.</span>' : "Everything is functioning within expected parameters."}`);
+  },
+  status: () => COMMANDS["systemctl status"](),
+  top: async () => {
+    const P = [[127, "DSA", 37], [128, "Overthinking", 41], [129, "Java", 12], [130, "Doomscrolling", 8], [131, "Coffee", 97]];
+    const d = print("");
+    for (let f = 0; f < 12; f++) {
+      d.innerHTML = `<table><tr><th>PID</th><th>PROCESS</th><th>CPU</th></tr>${P.map(([pid, n, c]) => { const v = Math.max(1, Math.min(99, c + (Math.random() * 8 - 4))); return `<tr><td>${pid}</td><td class="hot">${n}</td><td>${bar(v / 14)} ${v.toFixed(0)}%</td></tr>`; }).join("")}</table>`;
+      await wait(120);
+    }
+    print("Killing process 130 (Doomscrolling)...");
+    await wait(600);
+    print(`<span class="ok">SUCCESS.</span> <span class="dim">try</span> ${link("kill 128")} <span class="dim">or</span> ${link("kill 131")}`);
+  },
+  htop: () => COMMANDS.top(),
+  "./get-hired": async () => {
+    print(`<span class="alert">WARNING:</span>
+This action may result in:
+
+  ☑ employment
+  ☑ responsibility
+  ☑ less free time
+  ☑ having to maintain production code
+
+Proceed? [y/N]`);
+    ask(async a => {
+      if (!/^y(es)?$/.test(a)) { print(`Aborted. The offer stands whenever you're ready: ${link("./get-hired")}`); return; }
+      const d = print("Initializing employment protocol ");
+      for (let i = 0; i < 6; i++) { d.textContent += "."; await wait(220); }
+      print(`<span class="alert">ERROR 404:</span> Offer letter not found.`); await wait(700);
+      print("Opening contact information instead..."); await wait(500);
+      COMMANDS.contact();
+    });
+  },
+  "get-hired": () => COMMANDS["./get-hired"](), "get hired": () => COMMANDS["./get-hired"](), "./get_hired": () => COMMANDS["./get-hired"](),
+  "cat notes.md": () => print(`<div class="notes"><b>Namit's notes</b>
+· SIH: Zeek → Kafka → model. one-way traffic = no handshake. learn from one side only.
+· land-watch: same place, two dates. what changed? was it allowed?
+· qiskit: H gate → measure → 50/50. measure again → still 50/50.
+· DSA: KMP. the failure function is not my failure. (probably)
+· Java → Spring Boot → full stack.
+· first open-source PR this year.
+· refill coffee ☕</div>`),
+  notes: () => COMMANDS["cat notes.md"](), notebook: () => COMMANDS["cat notes.md"](),
+  phone: async () => {
+    const d = print("📱 Calling Namit ");
+    for (let i = 0; i < 4; i++) { d.textContent += "."; await wait(260); }
+    print(`<span class="dim">No number listed here. Namit answers faster on these:</span>
+  github    <a href="https://github.com/tiwarinamit131-droid" target="_blank" rel="noopener">github.com/tiwarinamit131-droid</a>
+  linkedin  <a href="https://www.linkedin.com/in/namit-tiwari-56b675380" target="_blank" rel="noopener">linkedin.com/in/namit-tiwari-56b675380</a>
+  email     ${link("contact")}`);
+  },
+  trash: () => listDir("~/.trash"),
+  achievements: () => print(`🏆 <span class="hot">You actually tried everything.</span> <span class="dim">(↑ ↑ ↓ ↓ ← → ← → B A)</span>
+Secrets found: ${found.size}/${TOTAL}${found.size === TOTAL ? "  ·  " + link("cat .credits", "roll credits") : ""}`),
+  "cat .credits": async () => {
+    if (found.size < TOTAL) { print("cat: .credits: No such file or directory"); return; }
+    const C = ["", "N A M I T O S", "", "written, built and debugged by", "Namit Tiwari", "", "fuel", "black coffee · iced americano", "",
+      "soundtrack", "Bloodywood · Rage Against the Machine", "Gojira · Black Sabbath · AC/DC", "", "driving force", "जय बजरंगबली", "",
+      "very good dog", "Byte", "", "special thanks", "you, for finding all of it.", "", "now go say hi:"];
+    for (const l of C) { print(`<span class="hot">${" ".repeat(Math.max(0, 22 - Math.floor(l.length / 2)))}${l}</span>`); await wait(200); }
+    COMMANDS.contact();
+  },
+
   coffee: () => COMMANDS["cat .coffee"](), brew: () => COMMANDS["cat .coffee"](),
   "jai hanuman": () => COMMANDS["cat .gada"](), "jai shree ram": () => COMMANDS["cat .gada"](), bajrangbali: () => COMMANDS["cat .gada"](), "jai bajrangbali": () => COMMANDS["cat .gada"](),
   feelings: () => COMMANDS["cat .heart"](), "sudo feel": () => COMMANDS["cat .heart"](),
@@ -674,13 +794,235 @@ __/ =| o |=-~~\  /~~\  /~~\  /~~\ ____Y___________|__
   print(`phosphor set to ${t}.`);
 });
 
+
+/* ---------- a tiny pretend shell: folders, sudo, y/N prompts and a memory of past visits ---------- */
+const WOOHOO = String.raw`__        _____   ___  _   _  ___   ___  _
+\ \      / / _ \ / _ \| | | |/ _ \ / _ \| |
+ \ \ /\ / / | | | | | | |_| | | | | | | | |
+  \ V  V /| |_| | |_| |  _  | |_| | |_| |_|
+   \_/\_/  \___/ \___/|_| |_|\___/ \___/(_)`;
+const sh = { user: "namit", host: "sau", cwd: "~", unlocked: false };
+const ps1 = () => `${sh.user}@${sh.host}:${sh.cwd}$`;
+const setPrompt = () => { $("ps1").textContent = ps1(); };
+const DOTS = [".coffee", ".heart", ".gada", ".playlist", ".court", ".gym", ".byte", ".compass", ".v0.1.jpg"];
+const listSecrets = () => print(`<span class="dim">.  ..</span>  ${DOTS.map(f => link("cat " + f, f)).join("  ")}`);
+let pending = null;
+const ask = fn => { pending = fn; input.placeholder = "y/N"; };
+
+/* visits: remembered in this browser only */
+const lastVisit = store.get("nt-visit", null);
+const V = { last: Date.now(), cmds: lastVisit ? lastVisit.cmds : 0 };
+store.set("nt-visit", V);
+const ago = t => { const s = (Date.now() - t) / 1000; const u = s < 60 ? ["just now"] : s < 3600 ? [Math.round(s / 60), "minute"] : s < 86400 ? [Math.round(s / 3600), "hour"] : [Math.round(s / 86400), "day"];
+  return u.length === 1 ? u[0] : `${u[0]} ${u[1]}${u[0] === 1 ? "" : "s"} ago`; };
+const motiv = () => Math.min(99, 31 + V.cmds * 2);
+
+/* Namit's own shell history, before you arrived */
+const NH = ["learn Java", "make BACHAT", "start DSA", "accidentally open KMP", "question life", "learn DSA again", "build NamitOS"];
+const NH_OUT = [
+  () => print("javac Namit.java ... still compiling. Spring Boot is next."),
+  () => print(`BACHAT is already built. ${link("cd ~/projects/BACHAT", "go see it")}`),
+  () => print("DSA started. Again."),
+  () => print(`pattern:  A B A B C A B A B
+failure:  0 0 1 2 0 1 2 3 4
+understanding: ▓░░░░░░░░░ 11%
+<span class="dim">You opened KMP again. Close the tab slowly and nobody gets hurt.</span>`),
+  () => print(`Answer not found. ${link("goals", "keep looking")}`),
+  () => print("loop detected: see entry 3."),
+  () => print("You're looking at it."),
+];
+
+/* ~/projects */
+const PROJ = {
+  BACHAT: `# BACHAT
+A money management website for groups. Split the bill, keep the friends.
+
+## Features
+· groups, expense logging, automatic bill splitting
+· real-time balances
+· Bachat Tip for shared extras
+· analytics dashboard and a Bachat Score for settling on time
+
+## Stack
+HTML · CSS · JavaScript
+
+## Source
+<a href="https://github.com/tiwarinamit131-droid/FWD_BACHAT_FINAL" target="_blank" rel="noopener">github.com/tiwarinamit131-droid/FWD_BACHAT_FINAL</a>`,
+  "SIH-2026": `# AI-Based Cyber Threat Detection in Unidirectional IP Traffic
+Smart India Hackathon 2026 · Problem Statement 26145 · NTRO
+status: in progress
+
+## Problem
+Traffic flows one way through gateway and peering links.
+No handshakes, no feedback, and the threats still have to be caught.
+
+## Pipeline
+Zeek ──▶ Apache Kafka ──▶ ML models ──▶ alerts
+
+## Notes
+· high-throughput ingestion for isolated monitoring enclaves
+· models flag protocol anomalies and malicious patterns`,
+  "LAND-WATCH": `# Satellite-Based Encroachment &amp; Land-Grab Detection
+status: in the pipeline
+
+## Idea
+Compare satellite images of the same place over time, spot new construction
+in protected forests and wetlands, then check land registry records:
+authorised, or illegal?
+
+## Pipeline
+imagery(t0) + imagery(t1) ──▶ change detection ──▶ registry check ──▶ flag`,
+  JAVA: `# JAVA
+Object-oriented programming, one class at a time.
+status: compiling
+next: Spring Boot`,
+  DSA: `# DSA
+Data structures and algorithms practice.
+status: ongoing. KMP has been opened more than once.
+see also: ${link("history")}`,
+};
+const md = t => `<div class="md">${t.split("\n").map(l => l.startsWith("# ") ? `<h1>${l.slice(2)}</h1>` : l.startsWith("## ") ? `<h2>${l.slice(3)}</h2>` : l).join("\n")}</div>`;
+const HOME_LS = () => sh.user === "visitor"
+  ? `${link("cat resume.pdf", "resume.pdf")}    ${link("cat contact.txt", "contact.txt")}    ${link("cd ~/projects", "projects/")}    ${link("cd secrets", "secrets/")}`
+  : `${link("cat about.txt", "about.txt")}  ${link("skills", "skills/")}  ${link("cd ~/projects", "projects/")}  ${link("cat education.log", "education.log")}  ${link("./contact.sh", "contact.sh")}  ${link("cat resume.txt", "resume.txt")}`;
+const TRASH = [["hello_world_FINAL_v3.java", "superseded by v4"], ["todo-app/", "every developer has one"], ["sleep_schedule.cfg", "corrupted"],
+  ["node_modules/", "3.4 GB of other people's code"], ["first_commit_msg.txt", '"asdf"']];
+function listDir(d) {
+  if (d === "~") print(HOME_LS());
+  else if (d === "~/projects") print(Object.keys(PROJ).map(k => link(`cd ~/projects/${k}`, k + "/")).join("    "));
+  else if (d.startsWith("~/projects/")) print(link(`cat ${d}/README.md`, "README.md"));
+  else if (d === "~/secrets") listSecrets();
+  else if (d === "~/.trash") print(`${TRASH.map(([f, n]) => `${f.padEnd(28)}<span class="dim">${n}</span>`).join("\n")}\n<span class="dim">try</span> ${link("restore sleep_schedule.cfg")}`);
+}
+/* resolve a path against the current folder: a folder, "DENIED", "UP" (above home) or null */
+function resolve(t) {
+  let parts = sh.cwd === "~" ? [] : sh.cwd.slice(2).split("/");
+  t = t.replace(/^\/home\/(namit|visitor)\/?/, "~/");
+  if (t === "~" || t === "") return "~";
+  if (t.startsWith("~/")) { parts = []; t = t.slice(2); }
+  else if (t.startsWith("/")) return null;
+  for (const seg of t.split("/").filter(Boolean)) {
+    if (seg === ".") continue;
+    if (seg === "..") { if (!parts.length) return "UP"; parts.pop(); continue; }
+    parts.push(seg);
+  }
+  if (!parts.length) return "~";
+  const [a, b, ...rest] = parts.map(x => x.toLowerCase());
+  if (a === "projects" && !b) return "~/projects";
+  if (a === "projects" && !rest.length) { const k = Object.keys(PROJ).find(k => k.toLowerCase() === b); return k ? "~/projects/" + k : null; }
+  if (a === "secrets" && !b) return sh.unlocked ? "~/secrets" : "DENIED";
+  if (a === ".trash" && !b) return "~/.trash";
+  return null;
+}
+const cdTo = d => { sh.cwd = d; setPrompt(); };
+
+async function nuke() {
+  print('<span class="alert">Deleting...</span>');
+  for (const [p, r] of [["/home/namit", "done"], ["/projects", "done"], ["/braincells", "done"], ["/coffee", '<span class="alert">FAILED (resource busy)</span>'], ["/usr/bin/sleep", "done"]]) {
+    const d = print(""), dots = Math.max(3, 20 - p.length);
+    for (let i = 1; i <= dots; i += 2) { d.textContent = `${p} ${".".repeat(i)}`; await wait(40); }
+    d.innerHTML = `${p} ${".".repeat(dots)} ${r}`; await wait(160);
+  }
+  await wait(400);
+  tube.classList.remove("degauss"); void tube.offsetWidth; tube.classList.add("degauss"); tone("thunk");
+  out.innerHTML = ""; $("ps1").textContent = ""; await wait(900);
+  for (const l of ["...", "", "Just kidding.", "", "Nice try."]) { print(l, l === "Nice try." ? "hot" : ""); await wait(l ? 650 : 100); }
+  await wait(1300);
+  out.innerHTML = ""; sh.cwd = "~"; setPrompt(); intro();
+  print('<span class="dim">restored from backup. Nothing was harmed, except a few braincells.</span>');
+  screen.scrollTop = 0;
+}
+
+async function shell(lc, raw) {
+  const v = sh.user === "visitor";
+  let m;
+  if ((m = lc.match(/^(?:sudo )?rm -(?:rf|fr|r -f|f -r) (?:--no-preserve-root )?\/\*?$/))) {
+    if (!lc.startsWith("sudo")) { print(`rm: cannot remove '/': Permission denied\n<span class="dim">you'd need sudo for that. Not that you should.</span>`); return true; }
+    print(`<span class="alert">WARNING: This will delete NamitOS.</span>\n\nContinue? [y/N]`);
+    ask(async a => { if (/^y(es)?$/.test(a)) await nuke(); else print("Aborted. NamitOS thanks you for your restraint."); });
+    return true;
+  }
+  if ((m = raw.match(/^echo\s+(.*?)\s*>\s*\/dev\/null$/i))) { print("Message successfully discarded.\n\nUnfortunately, I still saw it."); return true; }
+  if ((m = raw.match(/^echo\s+(.*)$/i))) { print(esc(m[1].replace(/^["']|["']$/g, ""))); return true; }
+  if ((m = lc.match(/^!(\d+)$/))) {
+    const n = +m[1];
+    if (n >= 1 && n <= NH.length) { print(`<span class="dim">${NH[n - 1]}</span>`); NH_OUT[n - 1](); return true; }
+    const h = hist[n - NH.length - 1];
+    if (h && !/^!/.test(h)) { hist.pop(); await run(h); } else print(`bash: !${n}: event not found`);
+    return true;
+  }
+  if ((m = lc.match(/^(?:sudo )?kill(?: -9)? (\d+)$/))) {
+    const R = { 127: "kill: (127) DSA: refused. It's on the syllabus.", 128: "kill: (128) Overthinking: killed. ...respawned. It always does.",
+      129: "kill: (129) Java: Exception in thread \"main\": you can't kill me, I run everywhere.", 130: "kill: (130): no such process. Doomscrolling is already dead.",
+      131: '<span class="alert">kill: (131) Coffee: Operation not permitted.</span> It is a kernel process.' };
+    print(R[m[1]] || `kill: (${m[1]}): no such process`);
+    return true;
+  }
+  if ((m = lc.match(/^restore (.+)$/))) { print(m[1] === "sleep_schedule.cfg" ? "restore: sleep_schedule.cfg: beyond repair. Try coffee instead." : `restore: ${esc(m[1])}: some things stay deleted.`); return true; }
+
+  /* folders */
+  if ((m = lc.match(/^(?:ls|ll|dir)(?: -a| -la| -l)?(?: (.+))?$/))) {
+    const flags = / -a| -la/.test(lc);
+    if (!m[1] && sh.cwd === "~" && flags) { COMMANDS["ls -a"](); return true; }
+    const d = m[1] ? resolve(m[1]) : sh.cwd;
+    if (d === "DENIED") print(`ls: cannot open directory '${esc(m[1])}': Permission denied\n<span class="dim">Hint: try something with sudo.</span>`);
+    else if (d && d !== "UP") listDir(d);
+    else print(`ls: cannot access '${esc(m[1])}': No such file or directory`);
+    return true;
+  }
+  if ((m = lc.match(/^cd(?: (.+))?$/))) {
+    const d = resolve(m[1] || "~");
+    if (d === "UP") print("You can't leave. This is the best directory on the internet.");
+    else if (d === "DENIED") print(`bash: cd: ${esc(m[1])}: Permission denied.\n<span class="dim">Hint: try something with sudo.</span>`);
+    else if (d) { if (d === sh.cwd && d === "~" && !m[1]) print("you're already home. 🏠"); cdTo(d); if (d.startsWith("~/projects/")) listDir(d); }
+    else if (/^\./.test(m[1])) print(`bash: cd: ${esc(m[1])}: Not a directory. Try ${link("cat " + esc(m[1]))}`);
+    else print(`bash: cd: ${esc(m[1])}: No such file or directory`);
+    return true;
+  }
+  if (lc === "pwd") { print(`/home/${sh.user}${sh.cwd.slice(1)}`); return true; }
+  if ((m = lc.match(/^(?:cat|less|more|open) (.*?)\/?readme\.md$/))) {
+    const d = m[1] ? resolve(m[1]) : sh.cwd;
+    if (d && d.startsWith("~/projects/")) print(md(PROJ[d.slice(11)]));
+    else print(`cat: ${esc(m[1])}README.md: No such file or directory`);
+    return true;
+  }
+  if (/^(cat|less) secrets\/?$/.test(lc)) { if (sh.unlocked) listSecrets(); else print(`cat: secrets/: Permission denied.\n<span class="dim">Hint: try something with sudo.</span>`); return true; }
+
+  if (v && lc === "whoami") { print("visitor"); return true; }
+  if (v && /^(cat|open|less|xdg-open) resume\.pdf$/.test(lc)) { await COMMANDS.resume(); return true; }
+  if (v && /^(cat|open|less) contact\.txt$/.test(lc)) { await COMMANDS.contact(); return true; }
+  if (v && /^sudo (add ?user|useradd)\b/.test(lc)) { print("adduser: The user `visitor' already exists. You're already in. 😄"); return true; }
+  if (v && /^(exit|logout)$/.test(lc)) { Object.assign(sh, { user: "namit", host: "sau", cwd: "~" }); setPrompt(); store.set("nt-user", "namit"); print('logout\n<span class="dim">visitor session closed. Come back any time.</span>'); return true; }
+  if (/^sudo ((cd|ls|cat|open) secrets\/?|su|su -|-i|-s|bash|!!)$/.test(lc)) {
+    if (sh.unlocked) { print("you're already in. Have a look around."); listSecrets(); return true; }
+    const d = print(`[sudo] password for ${sh.user}: `);
+    for (let i = 1; i <= 8; i++) { d.textContent = `[sudo] password for ${sh.user}: ${"*".repeat(i)}`; tone("click"); await wait(70); }
+    await wait(250);
+    print(`<span class="alert">${sh.user} is not in the sudoers file. This incident will be reported.</span>`);
+    await wait(700);
+    const r = print('<span class="dim">reporting to namit</span>');
+    for (let i = 0; i < 3; i++) { r.innerHTML += '<span class="dim">.</span>'; await wait(300); }
+    print(`namit: <span class="hot">"they actually tried sudo? Fine. Let them in."</span>\n<span class="ok">secrets/ unlocked.</span>`);
+    sh.unlocked = true;
+    if (!/^sudo (ls|cat|open) /.test(lc)) cdTo("~/secrets");
+    listSecrets();
+    return true;
+  }
+  return false;
+}
+Object.assign(COMMANDS, {
+  "cat education.log": () => COMMANDS.education(), "./contact.sh": () => COMMANDS.contact(), "cat contact.sh": () => COMMANDS.contact(),
+  "cat skills": () => COMMANDS.skills(),
+});
 const NAMES = Object.keys(COMMANDS);
 const hist = []; let hi = 0, busy = false, inVim = false;
 async function run(raw) {
   const c = raw.trim().replace(/\s+/g, " ");
-  print(`<span class="prompt">namit@sau:~$</span> <span class="hot">${esc(c)}</span>`);
+  print(`<span class="prompt">${ps1()}</span> <span class="hot">${esc(c)}</span>`);
   if (!c) return;
   hist.push(c); hi = hist.length;
+  V.cmds++; store.set("nt-visit", V);
+  if (pending) { const f = pending; pending = null; input.placeholder = ""; busy = true; try { await f(c.toLowerCase()); } finally { busy = false; } return; }
   if (inVim) {
     if ([":q!", ":q", ":wq", ":x", "zz", ":qa!"].includes(c.toLowerCase())) { inVim = false; print('<span class="ok">You escaped vim.</span> Put that on your résumé. Most people never make it out.'); }
     else print(`<span class="dim">-- INSERT --</span> still in vim. "${esc(c)}" was typed into the void. (hint: :q!)`);
@@ -688,6 +1030,8 @@ async function run(raw) {
   }
   const cs = c.match(/^cowsay (.+)$/i);
   if (cs) { COMMANDS.cowsay(cs[1].slice(0, 40)); return; }
+  busy = true;
+  try { if (await shell(c.toLowerCase(), c)) return; } finally { busy = false; }
   const fn = COMMANDS[c.toLowerCase()];
   if (fn) { busy = true; try { await fn(); } finally { busy = false; } }
   else if (/^sudo (add ?user|useradd)\b/i.test(c)) {
@@ -695,9 +1039,11 @@ async function run(raw) {
     try {
       const who = c.replace(/^sudo (add ?user|useradd)\s*/i, "").trim();
       for (const l of [`Adding user '${esc(who || "visitor")}' ...`, "Creating home directory ... done", "Copying files from /etc/skel ... done"]) { print(l, "dim"); await wait(220); }
-      print(`<span class="big" style="font-size:52px">WOOHOO!</span>
-<span class="hot">Showing interest in me? Well, good for you.</span> 😄
+      print(`<pre class="figlet">${WOOHOO}</pre><span class="hot">Showing interest in me? Well, good for you.</span> 😄
 <span class="dim">you now have read access to</span> ${link("resume")} <span class="dim">and</span> ${link("contact")}`);
+      await wait(500);
+      Object.assign(sh, { user: "visitor", host: "namit", cwd: "~" }); setPrompt(); store.set("nt-user", "visitor");
+      print(`<span class="dim">logged in as visitor. try</span> ${link("whoami")} <span class="dim">or</span> ${link("ls")}`);
     } finally { busy = false; }
   }
   else if (/^cd \.\w+/.test(c)) print(`bash: cd: ${esc(c.slice(3))}: Not a directory. Try ${link("cat " + esc(c.slice(3)))}`);
@@ -721,7 +1067,7 @@ screen.addEventListener("click", e => {
   if (b) { typeAndRun(b.dataset.cmd); return; }
   if (!getSelection().toString() && !e.target.closest("a")) input.focus({ preventScroll: true });
 });
-["neofetch", "about", "skills", "projects", "education", "resume", "contact", "qubit", "joke", "sudo hire namit", "theme", "clear"].forEach(c => {
+["help", "ls", "neofetch", "resume", "contact", "./get-hired", "clear"].forEach(c => {
   const b = document.createElement("button"); b.type = "button"; b.textContent = c; b.addEventListener("click", () => typeAndRun(c)); $("keys").appendChild(b);
 });
 
@@ -769,7 +1115,16 @@ That explains a lot about the Hanuman thing.
 
 /* konami code: the driving force */
 const KON = ["ArrowUp", "ArrowUp", "ArrowDown", "ArrowDown", "ArrowLeft", "ArrowRight", "ArrowLeft", "ArrowRight", "b", "a"]; let kp = 0;
-addEventListener("keydown", e => { kp = e.key === KON[kp] ? kp + 1 : e.key === KON[0] ? 1 : 0; if (kp === KON.length) { kp = 0; run("jai hanuman"); } });
+addEventListener("keydown", e => { kp = e.key === KON[kp] ? kp + 1 : e.key === KON[0] ? 1 : 0; if (kp === KON.length) { kp = 0; cheat(); } });
+async function cheat() {
+  input.value = "";
+  print(`<span class="big" style="font-size:40px">CHEAT CODE ACTIVATED</span>
+<span class="ok">Achievement unlocked:</span> <span class="hot">You actually tried everything.</span>`);
+  store.set("nt-cheat", true); $("trophy").hidden = false;
+  await wait(1100);
+  COMMANDS["cat .gada"]();
+}
+if (store.get("nt-cheat", false)) $("trophy").hidden = false;
 
 function runMatrix() {
   const cv = $("matrix");
@@ -815,11 +1170,32 @@ $("snd").addEventListener("click", e => { sound = !sound; e.currentTarget.setAtt
 const tube = $("tube");
 function replay(cls) { tube.classList.remove("degauss", "off"); tube.style.animation = "none"; void tube.offsetWidth; tube.style.animation = ""; if (cls) tube.classList.add(cls); }
 $("degauss").addEventListener("click", () => { if (tube.classList.contains("off")) return; replay("degauss"); tone("thunk"); });
-let powered = true;
-$("power").addEventListener("click", () => {
-  powered = !powered; $("led").classList.toggle("off", !powered); input.disabled = !powered;
-  if (powered) { replay(); tone("whine"); } else replay("off");
+let powered = true, pstate = "on";
+async function shutdown() {
+  if (pstate !== "on" || busy) return;
+  pstate = "shutting"; busy = true; input.disabled = true; pending = null;
+  print("Saving session...");
+  const d = print("");
+  for (let i = 0; i <= 18; i++) { d.textContent = `[${"█".repeat(i)}${"░".repeat(18 - i)}] ${Math.round(i / 18 * 100)}%`; await wait(50); }
+  await wait(250); print("NamitOS shutting down..."); await wait(800);
+  replay("off"); $("led").classList.add("off"); powered = false; pstate = "off"; busy = false;
+  setTimeout(() => { if (pstate === "off") $("nosig").hidden = false; }, 2000);
+}
+async function restart() {
+  if (pstate !== "off") return;
+  pstate = "booting"; $("nosig").hidden = true; tone("click"); tone("whine");
+  out.innerHTML = ""; $("led").classList.remove("off"); powered = true; replay();
+  await boot(true);
+  input.disabled = false; pstate = "on"; input.focus({ preventScroll: true });
+}
+$("power").addEventListener("click", () => pstate === "on" ? shutdown() : restart());
+$("nosig").addEventListener("click", restart);
+addEventListener("keydown", e => { if (pstate === "off" && !$("nosig").hidden) { e.preventDefault(); restart(); } });
+document.querySelector(".keyboard").addEventListener("click", e => {
+  if (e.target.closest("button")) return;
+  $("snd").click(); print(`keyboard: clicky mode <span class="hot">${sound ? "ON" : "OFF"}</span>`, "dim");
 });
+document.querySelector(".bezel").addEventListener("click", e => { if (pstate === "on" && !e.target.closest("button, a, .sticky")) input.focus({ preventScroll: true }); });
 const PHOS = ["amber", "green", "ice", "saffron"]; let pi = 0;
 $("knob").addEventListener("click", e => {
   if (!powered) return;
@@ -830,20 +1206,35 @@ $("knob").addEventListener("click", e => {
   tone("click");
 });
 document.querySelectorAll("[data-run]").forEach(o => o.addEventListener("click", () => {
-  if (!powered) { $("power").click(); }
+  if (pstate === "off") { restart(); return; }
+  if (pstate !== "on") return;
   if (matchMedia("(max-width: 860px)").matches) screen.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
   typeAndRun(o.dataset.run);
 }));
 
 /* boot: quick POST lines, then the summary and help, so the screen is complete at rest */
-(async () => {
-  for (const l of ["NT-BIOS v2.0 · POST", "memory check ........ 16384 MB ok", "mounting /projects .. 3 found", "loading kernel ...... ok", "starting NamitOS"]) { print(l, "dim"); await wait(110); }
-  out.innerHTML = "";
+function intro() {
   print(`<div class="big">NAMIT TIWARI</div><span class="dim">computer science · quantum computing · New Delhi</span>`);
   neofetch();
-  print(`<span class="dim">type</span> ${link("help")} <span class="dim">or try</span> ${link("about")} · ${link("projects")} · ${link("resume")} · ${link("contact")}`);
+  print(`<span class="dim">type</span> ${link("help")} <span class="dim">or try</span> ${link("ls")} · ${link("resume")} · ${link("contact")}`);
   screen.scrollTop = 0;
-})();
+}
+async function boot(bios) {
+  const L = bios ? ["NAMIT BIOS (C) 1987–2029", "Memory test: 640K OK", "Loading NamitOS..."]
+    : ["NT-BIOS v2.0 · POST", "memory check ........ 16384 MB ok", `mounting /projects .. ${Object.keys(PROJ).length} found`, "loading kernel ...... ok", "starting NamitOS"];
+  for (const l of L) { print(l, bios ? "" : "dim"); await wait(bios ? 450 : 110); }
+  if (bios) await wait(300);
+  out.innerHTML = "";
+  if (!bios) {
+    if (!lastVisit) print(`<span class="dim">Welcome, visitor. Initializing NamitOS...</span>`);
+    else print(`<span class="dim">Welcome back, visitor.
+Last login: ${ago(lastVisit.last)} on tty1
+Commands executed: ${lastVisit.cmds}${found.size ? `\nSecrets discovered: ${found.size}/${TOTAL}` : ""}</span>`);
+  }
+  intro();
+}
+if (store.get("nt-user", "namit") === "visitor") { Object.assign(sh, { user: "visitor", host: "namit" }); setPrompt(); }
+boot(false);
 </script>
 
 </body>
