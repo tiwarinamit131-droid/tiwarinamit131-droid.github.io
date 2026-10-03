@@ -3,7 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<meta name="description" content="Namit Tiwari, B.Tech Computer Science at South Asian University. Interactive terminal portfolio.">
+<meta name="description" content="Namit Tiwari, B.Tech Computer Science at South Asian University. Interactive retro-terminal portfolio.">
+<meta property="og:title" content="Namit Tiwari · NamitOS">
+<meta property="og:description" content="B.Tech CSE at South Asian University. Type help to start.">
+<meta name="theme-color" content="#15110d">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231b1206'/%3E%3Ctext x='5' y='22' font-family='monospace' font-size='16' fill='%23ffb547'%3E%3E_%3C/text%3E%3C/svg%3E">
 <title>namit@sau Terminal</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -36,7 +40,7 @@
 * { box-sizing: border-box; }
 body { margin: 0; background: var(--wall); color: var(--amber); font-family: var(--mono); font-size: 15px; line-height: 1.5; }
 :focus-visible { outline: 2px solid var(--note); outline-offset: 3px; }
-.room { min-height: 100%; background:
+.room { min-height: 100vh; display: flex; flex-direction: column; background:
   radial-gradient(ellipse 60% 45% at 50% 30%, color-mix(in srgb, var(--amber) 10%, transparent), transparent 70%),
   repeating-linear-gradient(90deg, var(--wall) 0 46px, var(--wall-line) 46px 48px); padding-top: 22px; }
 .stage { max-width: 1180px; margin: 0 auto; padding-inline: 16px; }
@@ -62,7 +66,7 @@ body { margin: 0; background: var(--wall); color: var(--amber); font-family: var
 .batt .cell::after { content: ""; position: absolute; right: -4px; top: 3px; width: 2px; height: 4px; background: var(--hot); }
 .batt .lvl { display: block; height: 100%; background: var(--amber); transition: width .4s; }
 .found { color: var(--ok); }
-.screen { position: relative; padding: 16px 18px 14px; height: min(60vh, 600px); min-height: 400px; overflow-y: auto; scrollbar-color: var(--dim) transparent;
+.screen { position: relative; padding: 16px 18px 14px; height: clamp(300px, calc(100vh - 420px), 640px); overflow-y: auto; scrollbar-color: var(--dim) transparent;
   text-shadow: 0 0 6px color-mix(in srgb, var(--amber) 55%, transparent); cursor: text; }
 .scan { pointer-events: none; position: absolute; inset: 0; z-index: 2;
   background: repeating-linear-gradient(0deg, rgb(0 0 0 / .2) 0 1px, transparent 1px 3px), radial-gradient(ellipse at center, transparent 60%, rgb(0 0 0 / .45)); animation: flick 5s infinite steps(1); }
@@ -87,7 +91,7 @@ body { margin: 0; background: var(--wall); color: var(--amber); font-family: var
 .stand { width: 34%; height: 34px; margin: 0 auto; background: linear-gradient(180deg, var(--plastic-dark), #8f846c); clip-path: polygon(18% 0, 82% 0, 100% 100%, 0 100%); }
 
 /* sticky note and sticker on the bezel */
-.sticky { position: absolute; z-index: 4; right: -14px; top: 60px; width: 132px; padding: 10px 10px 12px; background: var(--note); color: #3b3218; font: 600 17px/1.15 var(--hand);
+.sticky { position: absolute; z-index: 4; right: -112px; top: 70px; width: 132px; padding: 10px 10px 12px; background: var(--note); color: #3b3218; font: 600 17px/1.15 var(--hand);
   transform: rotate(4deg); box-shadow: 0 8px 14px rgb(0 0 0 / .35); clip-path: polygon(0 0, 100% 0, 100% 88%, 88% 100%, 0 100%); }
 .sticky b { display: block; font-size: 20px; }
 .sticky button { all: unset; cursor: pointer; text-decoration: underline; text-decoration-thickness: 2px; }
@@ -96,10 +100,10 @@ body { margin: 0; background: var(--wall); color: var(--amber); font-family: var
 .sticker svg { width: 12px; height: 12px; }
 
 /* ---------- desk ---------- */
-.desk { position: relative; margin-top: -2px; padding: 26px 16px 36px; background:
+.desk { flex: 1; position: relative; margin-top: -2px; padding: 22px 16px 26px; background:
   linear-gradient(180deg, #7a5233 0, var(--wood) 10px, var(--wood-dark) 100%),
   repeating-linear-gradient(178deg, transparent 0 18px, rgb(0 0 0 / .06) 18px 20px); background-blend-mode: multiply; box-shadow: inset 0 3px 0 #94673f; }
-.deskgrid { max-width: 1180px; margin: 0 auto; display: grid; grid-template-columns: 1fr minmax(0, 720px) 1fr; gap: 22px; align-items: end; }
+.deskgrid { max-width: 1320px; margin: 0 auto; display: grid; grid-template-columns: 1fr minmax(0, 820px) 1fr; gap: 22px; align-items: end; }
 .cluster { display: flex; gap: 14px; align-items: flex-end; flex-wrap: wrap; min-width: 0; }
 .cluster.left { justify-content: flex-end; }
 .obj { all: unset; cursor: pointer; position: relative; display: block; filter: drop-shadow(0 8px 6px rgb(0 0 0 / .45)); transition: transform .15s; }
@@ -126,7 +130,7 @@ body { margin: 0; background: var(--wall); color: var(--amber); font-family: var
 
 .keyboard { background: linear-gradient(180deg, #2b2620, #1c1814); border-radius: 12px; padding: 12px; box-shadow: 0 14px 20px rgb(0 0 0 / .5), inset 0 1px 0 rgb(255 255 255 / .08); position: relative; }
 .keys { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; }
-.keys button { font: 600 12px var(--mono); color: #2b2015; background: linear-gradient(180deg, #efe4cf, #cbbd9f); border: 0; border-radius: 6px; padding: 8px 11px 11px; cursor: pointer;
+.keys button { font: 600 12px var(--mono); color: #2b2015; background: linear-gradient(180deg, #efe4cf, #cbbd9f); border: 0; border-radius: 6px; padding: 7px 9px 10px; cursor: pointer;
   box-shadow: inset 0 -4px 0 #a8987a, 0 2px 0 #000; }
 .keys button:active { transform: translateY(2px); box-shadow: inset 0 -2px 0 #a8987a, 0 0 0 #000; }
 .paw { all: unset; cursor: pointer; position: absolute; right: 10px; bottom: -9px; width: 18px; height: 18px; opacity: .55; }
@@ -162,13 +166,14 @@ th { color: var(--crt); background: var(--amber); text-shadow: none; padding: 0 
 .v01 canvas { width: min(240px, 100%); height: auto; aspect-ratio: 3 / 4; max-width: 100%; display: block; margin: 6px 0; border: 1px solid var(--dim); image-rendering: pixelated; cursor: pointer; box-shadow: 0 0 18px color-mix(in srgb, var(--amber) 30%, transparent); }
 .matrix { position: fixed; inset: 0; pointer-events: none; z-index: 5; }
 
-@media (max-width: 1100px) { .sticky { right: 8px; top: auto; bottom: 64px; width: 118px; font-size: 15px; transform: rotate(3deg); } }
+.sticky.on-desk { position: relative; right: auto; top: auto; display: none; width: 100px; padding: 7px 8px 9px; font-size: 13px; transform: rotate(-4deg); }
+@media (max-width: 1240px) { .bezel .sticky { display: none; } .sticky.on-desk { display: block; } }
 @media (max-width: 1100px) {
   .deskgrid { grid-template-columns: 1fr; }
   .cluster, .cluster.left { justify-content: center; }
   .keyboard { order: -1; }
 }
-@media (max-width: 860px) { .sticky { display: none; } }
+@media (max-width: 600px) { .sticky.on-desk { display: none; } }
 @media (max-width: 600px) {
   .bezel { padding: 12px 10px 8px; border-radius: 16px; }
   .screen { padding: 12px; font-size: 13px; height: 64vh; }
@@ -226,6 +231,7 @@ th { color: var(--crt); background: var(--amber); text-shadow: none; padding: 0 
   <div class="desk">
     <div class="deskgrid">
       <div class="cluster left">
+        <div class="sticky on-desk"><b>TODO</b>☑ ship BACHAT<br>☐ win SIH 2026<br>☐ learn Qiskit<br>☐ get <button type="button" data-run="contact">hired</button></div>
         <button class="obj polaroid" type="button" data-run="git checkout v0.1" aria-label="A photo, face down">v0.1</button>
         <button class="obj paper" type="button" data-run="cat .heart" aria-label="A folded note">♡</button>
         <button class="obj mug" type="button" data-run="cat .coffee" aria-label="Black coffee">
@@ -835,7 +841,8 @@ document.querySelectorAll("[data-run]").forEach(o => o.addEventListener("click",
   out.innerHTML = "";
   print(`<div class="big">NAMIT TIWARI</div><span class="dim">computer science · quantum computing · New Delhi</span>`);
   neofetch();
-  COMMANDS.help();
+  print(`<span class="dim">type</span> ${link("help")} <span class="dim">or try</span> ${link("about")} · ${link("projects")} · ${link("resume")} · ${link("contact")}`);
+  screen.scrollTop = 0;
 })();
 </script>
 
